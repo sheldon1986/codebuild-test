@@ -23,7 +23,7 @@ phases:
   post_build:
     commands:
       - echo Push started on `date`
-      - docker push 030787254034.dkr.ecr.ap-northeast-2.amazonaws.com/codebuild-test/codebuild-test:test
+      - docker push 030787254034.dkr.ecr.ap-northeast-2.amazonaws.com/codebuild-test:test
 #      - docker push "${DOCKER_BASE_URL}/${DOCKER_IMAGE_NAME}:${DEV_TAG}"
       - echo Push completed on `date`
 
