@@ -1,25 +1,31 @@
 version: 0.2
 
-phases:
+#phases:
 #  install:
 #    runtime-versions:
-#      java: openjdk8
+#      java: openjdk11
 #    commands:
 #      - echo 'start build'
-
-  pre_build:
-    commands:
-      - echo ${test}
+#
+#  pre_build:
+#    commands:
+#      - echo gradle Build started on `date`
+#      - gradlew build -x test
     
-#  build:
-#    commands:
-#      - echo Build started on `date`
-#      - mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-#
-#  post_build:
-#    commands:
-#      - echo Build completed on `date`
-#
+  build:
+    commands:
+      - echo Build started on `date`
+      - docker build -t 804823275049.dkr.ecr.ap-northeast-2.amazonaws.com/codebuild-test:test .
+#      - docker build "${DOCKER_BASE_URL}/${DOCKER_IMAGE_NAME}:${DEV_TAG}", "-f ${DOCKER_FILE_PATH} ."
+      - echo Build completed on `date`
+
+  post_build:
+    commands:
+      - echo Push started on `date`
+      - docker push 804823275049.dkr.ecr.ap-northeast-2.amazonaws.com/codebuild-test:test
+#      - docker push "${DOCKER_BASE_URL}/${DOCKER_IMAGE_NAME}:${DEV_TAG}"
+      - echo Push completed on `date`
+
 #cache:
 #  paths:
 #    - '/root/.m2/**/*'
