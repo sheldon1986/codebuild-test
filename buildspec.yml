@@ -16,7 +16,7 @@ phases:
     commands:
       - echo Build started on `date`
       - $(aws ecr get-login --no-include-email --region ap-northeast-2)
-      - docker build -t 030787254034.dkr.ecr.ap-northeast-2.amazonaws.com/codebuild-test/codebuild-test:test .
+      - docker build -t 030787254034.dkr.ecr.ap-northeast-2.amazonaws.com/codebuild-test:test .
 #      - docker build "${DOCKER_BASE_URL}/${DOCKER_IMAGE_NAME}:${DEV_TAG}", "-f ${DOCKER_FILE_PATH} ."
       - echo Build completed on `date`
 
