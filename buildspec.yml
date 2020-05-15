@@ -3,9 +3,9 @@ version: 0.2
 env:
   variables:
     REGISTRY_URL: "030787254034.dkr.ecr.ap-northeast-2.amazonaws.com"
-	REGISTRY_NAME: "codebuild-test"
-    TAG: "test1"
-	AWS_REGION: "ap-northeast-2"
+#	REGISTRY_NAME: "codebuild-test"
+#    TAG: "test1"
+#	AWS_REGION: "ap-northeast-2"
 
 phases:
 
