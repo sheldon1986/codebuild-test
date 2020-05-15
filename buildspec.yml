@@ -3,9 +3,9 @@ version: 0.2
 env:
   variables:
     REGISTRY_URL: "030787254034.dkr.ecr.ap-northeast-2.amazonaws.com"
-#	REGISTRY_NAME: "codebuild-test"
-#    TAG: "test1"
-#	AWS_REGION: "ap-northeast-2"
+    REGISTRY_NAME: "codebuild-test"
+    TAG: "test1"
+    AWS_REGION: "ap-northeast-2"
 
 phases:
 
@@ -17,17 +17,16 @@ phases:
     
   build:
     commands:
-      - echo ${REGISTRY_URL}
-#      - echo Build started on `date`
-#      - $(aws ecr get-login --no-include-email --region ap-northeast-2
-#      - docker build -t 030787254034.dkr.ecr.ap-northeast-2.amazonaws.com/codebuild-test:test1 .
-#      - echo Build completed on `date`
-#
-#  post_build:
-#    commands:
-#      - echo Push started on `date`
-#      - docker push 030787254034.dkr.ecr.ap-northeast-2.amazonaws.com/codebuild-test:test1
-#      - echo Push completed on `date`
+      - echo Build started on `date`
+      - $(aws ecr get-login --no-include-email --region ${AWS_REGION}
+      - docker build -t ${REGISTRY_URL}/${REGISTRY_NAME}:${TAG} .
+      - echo Build completed on `date`
+
+  post_build:
+    commands:
+      - echo Push started on `date`
+      - docker push ${REGISTRY_URL}/${REGISTRY_NAME}:${TAG}
+      - echo Push completed on `date`
 
 #cache:
 #  paths:
