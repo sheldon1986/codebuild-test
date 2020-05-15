@@ -18,7 +18,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - $(aws ecr get-login --no-include-email --region ${AWS_REGION}
+      - $(aws ecr get-login --no-include-email --region ${AWS_REGION})
       - docker build -t ${REGISTRY_URL}/${REGISTRY_NAME}:${TAG} .
       - echo Build completed on `date`
 
