@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     REGISTRY_URL: "030787254034.dkr.ecr.ap-northeast-2.amazonaws.com"
-    REGISTRY_NAME: "codebuild-test"
+    REPOSITORY_NAME: "codebuild-test1"
     TAG: "test1"
     AWS_REGION: "ap-northeast-2"
 
@@ -19,15 +19,16 @@ phases:
     commands:
       - echo Build started on `date`
       - $(aws ecr get-login --no-include-email --region ${AWS_REGION})
-      - docker build -t ${REGISTRY_URL}/${REGISTRY_NAME}:${TAG} .
-      - echo Build completed on `date`
-
-  post_build:
-    commands:
-      - echo Push started on `date`
-      - docker push ${REGISTRY_URL}/${REGISTRY_NAME}:${TAG}
-      - echo Push completed on `date`
-
+      - aws ecr create-repository --repository-name ${REPOSITORY_NAME} --image-scanning-configuration scanOnPush=true --region ${AWS_REGION}
+#      - docker build -t ${REGISTRY_URL}/${REPOSITORY_NAME}:${TAG} .
+#      - echo Build completed on `date`
+#
+#  post_build:
+#    commands:
+#      - echo Push started on `date`
+#      - docker push ${REGISTRY_URL}/${REPOSITORY_NAME}:${TAG}
+#      - echo Push completed on `date`
+#
 #cache:
 #  paths:
 #    - '/root/.gradle/caches/**/*'
